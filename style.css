@@ -5,7 +5,7 @@
     --primary-color: #d81e5b; /* লাভ শেপ ও হাইলাইট রং */
     --secondary-color: #f7e0e7; 
     --text-color: #333;
-    --unique-text-color: #8338ec; /* 🎉 ইউনিক কালার (ভাইব্রেন্ট পার্পল) */
+    --unique-text-color: #8338ec; /* ভাইব্রেন্ট পার্পল */
     --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
     --card-radius: 20px; 
 }
@@ -16,9 +16,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 100vh; 
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden; 
     position: relative;
 }
 
@@ -43,7 +43,8 @@ body {
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
-    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+    /* কার্ড ফ্লিপিং দ্রুত করা হলো (0.6s) */
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out; 
     overflow: hidden; 
 }
 
@@ -51,7 +52,7 @@ body {
 .card-cover {
     background: 
         linear-gradient(rgba(0, 0, 0, 0.4), var(--primary-color)), 
-        url('image3.jpg'); 
+        url('image2.jpg'); 
     background-size: cover; 
     background-position: center;
     color: white;
@@ -75,6 +76,26 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
 }
 
+#openCardBtn {
+    /* বাটন স্টাইল */
+    padding: 12px 25px;
+    font-size: 1.1em;
+    background-color: white;
+    color: var(--primary-color);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    font-family: 'Tiro Bangla', sans-serif;
+}
+
+#openCardBtn:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: scale(1.05);
+}
+
 /* ম্যাসেজ স্টাইল (খোলা কার্ড) */
 .card-message {
     background: white;
@@ -87,7 +108,7 @@ body {
     overflow-y: auto; 
 }
 
-/* টেক্সট সাইজ কমানো এবং কালার পরিবর্তন */
+/* টেক্সট স্টাইল */
 .birthday-heading {
     color: var(--primary-color);
     font-size: 2.2em; 
@@ -126,6 +147,11 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+.emoji-sparkle {
+    font-size: 1.5em;
+    margin-top: 15px;
+}
+
 /* যখন কার্ড খোলা হবে - 3D ফ্লিপ এনিমেশন */
 .card-open #cardCover {
     transform: rotateY(-180deg);
@@ -157,9 +183,7 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* লাভ শেপ তৈরি (CSS) */
-.heart:before,
-.heart:after {
+.heart:before, .heart:after {
     content: "";
     position: absolute;
     width: 100%;
@@ -178,7 +202,6 @@ body {
     top: 0;
 }
 
-/* লাভ ঝরার এনিমেশন */
 @keyframes heart-fall {
     0% {
         transform: translateY(-100vh) rotate(0deg);
@@ -187,5 +210,61 @@ body {
     100% {
         transform: translateY(100vh) rotate(1080deg);
         opacity: 0;
+    }
+}
+
+/* ============================================== */
+/* মোবাইল ডিভাইসের জন্য Media Queries        */
+/* ============================================== */
+
+/* 500px বা তার নিচের স্ক্রিনের জন্য (সাধারণ স্মার্টফোন) */
+@media (max-width: 500px) {
+    
+    .card-container {
+        width: 95vw; 
+        max-width: none;
+        height: 85vh; 
+    }
+
+    .main-heading {
+        font-size: 2em; 
+    }
+    
+    .wish-text {
+        font-size: 1em;
+    }
+
+    #openCardBtn {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .birthday-heading {
+        font-size: 1.8em; 
+    }
+
+    .greeting-line, .main-message {
+        font-size: 0.9em; 
+    }
+    
+    .message-photo {
+        width: 80%; 
+        max-height: 120px; 
+    }
+}
+
+/* খুব ছোট স্ক্রিনের জন্য */
+@media (max-width: 350px) {
+    
+    .card-container {
+        height: 90vh; 
+    }
+    
+    .main-heading {
+        font-size: 1.8em; 
+    }
+    
+    .birthday-heading {
+        font-size: 1.6em; 
     }
 }
