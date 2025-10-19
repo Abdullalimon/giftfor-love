@@ -1,0 +1,191 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;0&display=swap');
+
+:root {
+    --primary-color: #d81e5b; /* লাভ শেপ ও হাইলাইট রং */
+    --secondary-color: #f7e0e7; 
+    --text-color: #333;
+    --unique-text-color: #8338ec; /* 🎉 ইউনিক কালার (ভাইব্রেন্ট পার্পল) */
+    --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    --card-radius: 20px; 
+}
+
+body {
+    font-family: 'Tiro Bangla', sans-serif;
+    background: linear-gradient(135deg, #fce4ec, var(--secondary-color));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-container {
+    width: 90vw;
+    max-width: 450px; 
+    height: 550px; 
+    perspective: 1200px; 
+}
+
+/* কভার এবং ম্যাসেজ অংশের বেস স্টাইল */
+.card-cover, .card-message {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--card-radius); 
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+    overflow: hidden; 
+}
+
+/* কভার স্টাইল (বন্ধ থাকা কার্ড) */
+.card-cover {
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.4), var(--primary-color)), 
+        url('image3.jpg'); 
+    background-size: cover; 
+    background-position: center;
+    color: white;
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.cover-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.main-heading {
+    font-size: 2.5em;
+    margin: 10px 0;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+}
+
+/* ম্যাসেজ স্টাইল (খোলা কার্ড) */
+.card-message {
+    background: white;
+    color: var(--text-color);
+    z-index: 1;
+    opacity: 0;
+    transform: rotateY(180deg);
+    justify-content: flex-start; 
+    gap: 10px;
+    overflow-y: auto; 
+}
+
+/* টেক্সট সাইজ কমানো এবং কালার পরিবর্তন */
+.birthday-heading {
+    color: var(--primary-color);
+    font-size: 2.2em; 
+    margin: 5px 0 10px 0;
+}
+
+.greeting-line {
+    font-size: 1em; 
+    font-weight: 500;
+    color: var(--unique-text-color); 
+}
+
+.main-message {
+    font-size: 1.0em; 
+    line-height: 1.5;
+    margin: 5px 0;
+    padding: 0 5px;
+    color: var(--unique-text-color); 
+}
+
+.signature {
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 1.1em; 
+    color: var(--primary-color);
+}
+
+.message-photo {
+    width: 70%;
+    height: auto;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 10px; 
+    margin: 10px auto;
+    border: 4px solid var(--primary-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* যখন কার্ড খোলা হবে - 3D ফ্লিপ এনিমেশন */
+.card-open #cardCover {
+    transform: rotateY(-180deg);
+    opacity: 0;
+}
+
+.card-open #cardMessage {
+    transform: rotateY(0deg);
+    opacity: 1;
+}
+
+/* ------------------- লাভ ঝরার এনিমেশন ------------------- */
+#heart-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; 
+    z-index: 1000;
+}
+
+.heart {
+    position: absolute;
+    background-color: var(--primary-color);
+    opacity: 0;
+    transform: translateY(-100vh);
+    animation: heart-fall linear infinite;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* লাভ শেপ তৈরি (CSS) */
+.heart:before,
+.heart:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+}
+
+.heart:before {
+    top: -50%;
+    left: 0;
+}
+
+.heart:after {
+    left: 50%;
+    top: 0;
+}
+
+/* লাভ ঝরার এনিমেশন */
+@keyframes heart-fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(100vh) rotate(1080deg);
+        opacity: 0;
+    }
+}
